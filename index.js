@@ -1,6 +1,10 @@
 // TASK: import helper functions from utils
 //💻Import functions from taskFunctions.js
-import {getTasks, createNewTask, patchTask, putTask, deleteTask} from "./utils/taskFunctions.js";
+import {getTasks,
+        createNewTask,
+        patchTask,
+        putTask,
+        deleteTask} from "./utils/taskFunctions.js";
 //💻TASK: import initialData
 import {initialData} from './initialData.js';
 
@@ -20,7 +24,7 @@ function initializeData() {
 
 // TASK: Get elements from the DOM
 const elements = {
-  // Select the navigation sidebar elements
+  // Select elements in the navigation sidebar
   sideBarDiv: document.getElementById('side-bar-div'),
   logo: document.getElementById('logo'),
   iconDark: document.getElementById('icon-dark'),
@@ -31,14 +35,14 @@ const elements = {
   logoDiv: document.getElementById('side-logo-div'),
 
 
-  // Select the main layout elements
+  // Select elements in the main layout
   layout: document.getElementById('layout'),
   header: document.getElementById('header'),
   headerBoardName: document.getElementById('header-board-name'),
   editBoardBtn: document.getElementById('edit-board-btn'),
   editBoardDiv: document.getElementById('editBoardDiv'),
 
-  // Select the task columns elements
+  // Select elements in the task columns
   todoHeadDiv: document.getElementById('todo-head-div'),
   todoDot: document.getElementById('todo-dot'),
   toDoText: document.getElementById('toDoText'),
@@ -51,7 +55,7 @@ const elements = {
   doneText: document.getElementById('doneText'),
   columnDivs: document.querySelectorAll('.column-div'),
 
-  // Select the modal elements
+  // Select elements in the modal window
   modalWindow: document.getElementById('new-task-modal-window'),
   titleInput: document.getElementById('title-input'),
   descInput: document.getElementById('desc-input'),
@@ -60,7 +64,7 @@ const elements = {
   createNewTaskBtn: document.getElementById('add-new-task-btn'),
 
 
-  // Select the edit task modal elements
+  // Select elements in the edit task modal
   editTaskModalWindow: document.querySelector('.edit-task-modal-window'),
   editTaskTitleInput: document.getElementById('edit-task-title-input'),
   editTaskDescInput: document.getElementById('edit-task-desc-input'),
@@ -68,7 +72,7 @@ const elements = {
   saveTaskChangesBtn: document.getElementById('save-task-changes-btn'),
   deleteTaskBtn: document.getElementById('delete-task-btn'),
 
-  // Additional elements if needed
+  // Select AfterDiv for closing the modal on clicking anywhere
   filterDiv: document.getElementById('filterDiv'),
   
 }
@@ -78,9 +82,8 @@ let activeBoard = ""
 // Extracts unique board names from tasks
 // TASK: FIX BUGS
 function fetchAndDisplayBoardsAndTasks() {
-  const tasks = getTasks();
-  const boards = [...new Set(tasks.map(task => task.board).filter(Boolean))];
-  console.log(boards.length);
+  const tasks = getTasks(); //gets an array of task objects using the task function
+  const boards = [...new Set(tasks.map(task => task.board).filter(Boolean))]; // select task that are not null and avoid repetition
   displayBoards(boards);
   if (boards.length > 0) {
     const localStorageBoard = JSON.parse(localStorage.getItem("activeBoard"))
